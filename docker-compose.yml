@@ -1,0 +1,15 @@
+expenses:
+  build: .
+  ports:
+  - "8080:8080"
+  links:
+  - db
+db:
+  image: mysql
+  expose:
+  - "3306"
+  environment:
+  - MYSQL_ROOT_PASSWORD=root
+  - MYSQL_DATABASE=expenses
+  - MYSQL_USER=dbuser
+  - MYSQL_PASSWORD=dbpass

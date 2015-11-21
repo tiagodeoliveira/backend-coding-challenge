@@ -29,12 +29,12 @@ var compress = true;
 // Source and destination dirs
 var paths = {
 	static: {
-		source: "./src/",
-		target: "./static/"
+		source: "./src/main/web/src/",
+		target: "./src/main/resources/static/static/"
 	},
 	build: {
-		source: "./build/source/",
-		target: "./build/dest/"
+		source: "./build/web/source/",
+		target: "./build/resources/main/static/static/"
 	},
 	copy: [
 		"fonts/**/*.*",
@@ -53,10 +53,10 @@ var options = {
 	uglify: {
 		compress: {
 			drop_console: true,
-			sequences: true, // join consecutive statemets with the “comma operator”
+			sequences: true, // join consecutive statemets with the ï¿½comma operatorï¿½
 			properties: true, // optimize property access: a["foo"] ? a.foo
 			dead_code: true, // discard unreachable code
-			drop_debugger: true, // discard “debugger” statements
+			drop_debugger: true, // discard ï¿½debuggerï¿½ statements
 			unsafe: false, // some unsafe optimizations (see below)
 			conditionals: true, // optimize if-s and conditional expressions
 			comparisons: true, // optimize comparisons
@@ -126,7 +126,7 @@ var lists = {
 function buildPathArray(prefix, paths) {
 	var list = [];
 	prefix = prefix || "";
-	
+
 	for (var u = 0; u < paths.length; u++)
 		list.push(prefix + paths[u]);
 
@@ -146,7 +146,7 @@ gulp.task("uncompressed", function() {
 	options.browserify.debug = false;
 });
 
-// Clean copied source directories          
+// Clean copied source directories
 gulp.task("clean-source", function() {
 	return gulp.src(paths.build.source, { read: false })
 		.pipe(clean());
@@ -201,7 +201,7 @@ gulp.task("apps-partials", function() {
 			var pathArray = file.path.split("/");
 			pathArray.pop();
 			var basename = pathArray.pop();
-			
+
 			return gulp.src(file.path + "/**/*.html")
 				.pipe(minifyhtml(options.minifiy))
 				.pipe(ngtemplates({
@@ -224,7 +224,7 @@ gulp.task("apps-scripts", ["apps-partials"], function() {
 			var pathArray = file.path.split("/");
 			pathArray.pop();
 			var basename = pathArray.pop();
-			
+
 			var bundler = new browserify(options.browserify);
 			bundler.add(file.path);
 			bundler.external("moment");

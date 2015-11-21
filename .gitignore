@@ -1,2 +1,7 @@
 node_modules
 build
+
+.gradle
+.idea
+src/main/resources/static/static
+*.iml
