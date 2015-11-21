@@ -4,6 +4,8 @@ expenses:
   - "8080:8080"
   links:
   - db
+  environment:
+  - DATABASE=jdbc:mysql://db/expenses
 db:
   image: mysql
   expose:
